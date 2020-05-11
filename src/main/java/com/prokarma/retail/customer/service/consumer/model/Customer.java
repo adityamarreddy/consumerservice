@@ -7,13 +7,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.springframework.validation.annotation.Validated;
-import org.threeten.bp.LocalDate;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.threetenbp.deser.LocalDateDeserializer;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -36,7 +32,7 @@ public class Customer {
   // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   // @JsonDeserialize(using = LocalDateDeserializer.class)
   @JsonProperty("birthDate")
-  private LocalDate birthDate = null;
+  private String birthDate = null;
 
   @JsonProperty("country")
   private String country = null;
@@ -157,7 +153,7 @@ public class Customer {
     this.lastName = lastName;
   }
 
-  public Customer birthDate(LocalDate birthDate) {
+  public Customer birthDate(String birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -169,13 +165,12 @@ public class Customer {
    **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
-
-  @Valid
-  public LocalDate getBirthDate() {
+  @Pattern(message = "Invalid date", regexp = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$")
+  public String getBirthDate() {
     return birthDate;
   }
 
-  public void setBirthDate(LocalDate birthDate) {
+  public void setBirthDate(String birthDate) {
     this.birthDate = birthDate;
   }
 
@@ -255,7 +250,8 @@ public class Customer {
    **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
-  @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@([A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+  @Pattern(message = "Invalid email",
+      regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@([A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
   public String getEmail() {
     return email;
   }

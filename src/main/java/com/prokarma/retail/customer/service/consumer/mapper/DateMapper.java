@@ -1,16 +1,19 @@
 package com.prokarma.retail.customer.service.consumer.mapper;
 
-import org.springframework.stereotype.Component;
-import org.threeten.bp.DateTimeUtils;
-import org.threeten.bp.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateMapper {
 
-  public java.sql.Date asSqlDate(LocalDate birthDate) {
-    return DateTimeUtils.toSqlDate(birthDate);
+  SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+  public java.sql.Date asSqlDate(String birthDate) throws ParseException {
+    Date parsedDate = format.parse(birthDate);
+    return new java.sql.Date(parsedDate.getTime());
   }
 
-  public LocalDate asLocalDate(java.sql.Date birthDate) {
-    return DateTimeUtils.toLocalDate(birthDate);
+  public String asLocalDate(java.sql.Date birthDate) {
+    return format.format(birthDate);
   }
 }

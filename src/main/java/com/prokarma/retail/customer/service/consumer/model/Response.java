@@ -1,14 +1,14 @@
 package com.prokarma.retail.customer.service.consumer.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Response
@@ -17,6 +17,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(
     value = "com.prokarma.retail.customer.service.producer.codegen.v3.generators.java.SpringCodegen",
     date = "2020-04-18T05:15:19.983Z[GMT]")
+@JsonInclude(Include.NON_NULL)
 public class Response {
   /**
    * valid response status
